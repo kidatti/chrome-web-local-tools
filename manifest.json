@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Web Local Tools",
+  "version": "0.1.0",
+  "description": "文字コード変換、UUID生成などの便利なWeb開発ツール",
+  "action": {
+    "default_icon": {
+      "128": "images/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "permissions": [
+    "clipboardWrite"
+  ],
+  "icons": {
+    "128": "images/icon128.png"
+  }
+}

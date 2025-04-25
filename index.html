@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web開発ツール</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fullpage.css">
+</head>
+<body>
+  <div class="fullpage-container">
+    <div class="two-column-layout">
+      <!-- 左側メニュー -->
+      <div class="sidebar">
+        <nav class="menu">
+          <ul>
+            <li class="menu-item active" data-content="encode-decode">エンコード/デコード</li>
+            <li class="menu-item" data-content="charset">文字コード変換</li>
+            <li class="menu-item" data-content="json">JSONパース</li>
+            <li class="menu-item" data-content="datetime">UNIXタイムスタンプ</li>
+            <li class="menu-item" data-content="datetime-diff">日時比較</li>
+            <li class="menu-item" data-content="hash">ハッシュ生成</li>
+            <li class="menu-item" data-content="random">ランダム値生成</li>
+            <li class="menu-item" data-content="generator">UUID生成</li>
+            <li class="menu-item" data-content="hex-binary">HEX/Binary</li>
+            <li class="menu-item" data-content="color">カラーコード</li>
+            <li class="menu-item" data-content="url-parser">URLパーサー</li>
+          </ul>
+        </nav>
+      </div>
+      
+      <!-- 右側コンテンツエリア -->
+      <div class="content-area">
+        <!-- エンコード/デコードコンテンツ -->
+        <div class="content active" id="encode-decode-content">
+          <h2>エンコード/デコード</h2>
+          
+          <div class="form-group">
+            <label for="input-text">入力テキスト:</label>
+            <textarea id="input-text" rows="10" placeholder="変換したいテキストを入力してください"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="encoding-type">変換タイプ:</label>
+            <select id="encoding-type">
+              <option value="url">URLエンコード/デコード</option>
+              <option value="base64">Base64エンコード/デコード</option>
+              <option value="html">HTMLエンコード/デコード</option>
+            </select>
+          </div>
+          
+          <div class="button-group">
+            <button id="encode-button">エンコード</button>
+            <button id="decode-button">デコード</button>
+          </div>
+          
+          <div class="form-group">
+            <label for="output-text">結果:</label>
+            <textarea id="output-text" rows="10" readonly></textarea>
+          </div>
+          
+          <button id="copy-encoding" class="copy-button">結果をコピー</button>
+        </div>
+        
+        <!-- 文字コード変換コンテンツ -->
+        <div class="content" id="charset-content">
+          <h2>文字コード変換</h2>
+          
+          <div class="form-group">
+            <label for="charset-input">入力テキスト:</label>
+            <textarea id="charset-input" rows="10" placeholder="変換したいテキストを入力してください"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="charset-from">変換元:</label>
+                <select id="charset-from">
+                  <option value="UTF-8">UTF-8</option>
+                  <option value="UTF-16">UTF-16</option>
+                  <option value="UTF-16BE">UTF-16BE</option>
+                  <option value="UTF-16LE">UTF-16LE</option>
+                  <option value="SJIS">Shift_JIS</option>
+                  <option value="EUCJP">EUC-JP</option>
+                  <option value="JIS">ISO-2022-JP</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="charset-to">変換先:</label>
+                <select id="charset-to">
+                  <option value="UTF-8">UTF-8</option>
+                  <option value="UTF-16">UTF-16</option>
+                  <option value="UTF-16BE">UTF-16BE</option>
+                  <option value="UTF-16LE">UTF-16LE</option>
+                  <option value="SJIS">Shift_JIS</option>
+                  <option value="EUCJP">EUC-JP</option>
+                  <option value="JIS">ISO-2022-JP</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <button id="convert-charset">変換</button>
+          
+          <div class="form-group">
+            <label for="charset-output">結果:</label>
+            <textarea id="charset-output" rows="10" readonly></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="charset-hex">16進数表示:</label>
+            <textarea id="charset-hex" rows="5" readonly></textarea>
+          </div>
+          
+          <button id="copy-charset" class="copy-button">結果をコピー</button>
+        </div>
+        
+        <!-- JSONパースコンテンツ -->
+        <div class="content" id="json-content">
+          <h2>JSONパース</h2>
+          
+          <div class="form-group">
+            <label for="json-input">入力JSON:</label>
+            <textarea id="json-input" rows="10" placeholder="JSONを入力してください"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="json-action">アクション:</label>
+            <select id="json-action">
+              <option value="parse">パース (JSON文字列→オブジェクト)</option>
+              <option value="stringify">文字列化 (オブジェクト→JSON文字列)</option>
+              <option value="format">整形 (インデント追加)</option>
+              <option value="minify">最小化 (スペース削除)</option>
+            </select>
+          </div>
+          
+          <button id="json-process">実行</button>
+          
+          <div class="form-group">
+            <label for="json-output">結果:</label>
+            <textarea id="json-output" rows="10" readonly></textarea>
+          </div>
+          
+          <button id="copy-json" class="copy-button">結果をコピー</button>
+        </div>
+        
+        <!-- UUID生成コンテンツ -->
+        <div class="content" id="generator-content">
+          <h2>UUID生成</h2>
+          <div class="form-group">
+            <label for="uuid-version">バージョン:</label>
+            <select id="uuid-version">
+              <option value="v4">UUID v4 (ランダム)</option>
+              <option value="v1">UUID v1 (タイムベース)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="uuid-format">フォーマット:</label>
+            <select id="uuid-format">
+              <option value="standard">標準 (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</option>
+              <option value="no-dash">ダッシュなし (xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)</option>
+              <option value="braces">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="uuid-count">生成数:</label>
+            <input type="number" id="uuid-count" min="1" max="100" value="1">
+          </div>
+          
+          <button id="generate-uuid">生成</button>
+          
+          <div class="form-group">
+            <label for="uuid-result">結果:</label>
+            <textarea id="uuid-result" rows="10" readonly></textarea>
+          </div>
+          
+          <button id="copy-uuid" class="copy-button">結果をコピー</button>
+        </div>
+        
+        <!-- HEX/Binary変換コンテンツ -->
+        <div class="content" id="hex-binary-content">
+          <h2>HEX/Binary変換</h2>
+          
+          <div class="section">
+            <h3>文字列→HEX/Binary</h3>
+            <div class="form-group">
+              <label for="string-input">文字列入力:</label>
+              <textarea id="string-input" rows="5" placeholder="変換したい文字列を入力してください"></textarea>
+            </div>
+            
+            <div class="button-group">
+              <button id="string-to-hex">HEXに変換</button>
+              <button id="string-to-binary">Binaryに変換</button>
+            </div>
+            
+            <div class="form-group">
+              <label for="hex-result">HEX結果:</label>
+              <textarea id="hex-result" rows="5" readonly></textarea>
+              <button id="copy-hex" class="copy-button">コピー</button>
+            </div>
+            
+            <div class="form-group">
+              <label for="binary-result">Binary結果:</label>
+              <textarea id="binary-result" rows="5" readonly></textarea>
+              <button id="copy-binary" class="copy-button">コピー</button>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h3>HEX/Binary→文字列</h3>
+            <div class="form-group">
+              <label for="hex-input">HEX入力:</label>
+              <textarea id="hex-input" rows="5" placeholder="スペース区切りの16進数を入力してください (例: 48 65 6c 6c 6f)"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="binary-input">Binary入力:</label>
+              <textarea id="binary-input" rows="5" placeholder="スペース区切りの2進数を入力してください (例: 01001000 01100101 01101100 01101100 01101111)"></textarea>
+            </div>
+            
+            <div class="button-group">
+              <button id="hex-to-string">HEXから変換</button>
+              <button id="binary-to-string">Binaryから変換</button>
+            </div>
+            
+            <div class="form-group">
+              <label for="string-result">文字列結果:</label>
+              <textarea id="string-result" rows="5" readonly></textarea>
+              <button id="copy-string" class="copy-button">コピー</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- カラーコード変換コンテンツ -->
+        <div class="content" id="color-content">
+          <h2>カラーコード変換</h2>
+          
+          <div class="color-picker-container">
+            <input type="color" id="color-picker" value="#007bff">
+            <div id="color-preview" class="color-preview"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="hex-color">HEX:</label>
+            <div class="input-with-button">
+              <input type="text" id="hex-color" value="#007bff">
+              <button id="update-from-hex">更新</button>
+              <button id="copy-hex-color" class="copy-button">コピー</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="rgb-color">RGB:</label>
+            <div class="input-with-button">
+              <input type="text" id="rgb-color" value="rgb(0, 123, 255)">
+              <button id="update-from-rgb">更新</button>
+              <button id="copy-rgb-color" class="copy-button">コピー</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="hsl-color">HSL:</label>
+            <div class="input-with-button">
+              <input type="text" id="hsl-color" value="hsl(211, 100%, 50%)">
+              <button id="update-from-hsl">更新</button>
+              <button id="copy-hsl-color" class="copy-button">コピー</button>
+            </div>
+          </div>
+          
+          <div class="color-sliders">
+            <div class="slider-group">
+              <label>R: <span id="red-value">0</span></label>
+              <input type="range" id="red-slider" min="0" max="255" value="0">
+            </div>
+            <div class="slider-group">
+              <label>G: <span id="green-value">123</span></label>
+              <input type="range" id="green-slider" min="0" max="255" value="123">
+            </div>
+            <div class="slider-group">
+              <label>B: <span id="blue-value">255</span></label>
+              <input type="range" id="blue-slider" min="0" max="255" value="255">
+            </div>
+          </div>
+        </div>
+        
+        <!-- URLパーサーコンテンツ -->
+        <div class="content" id="url-parser-content">
+          <h2>URLパーサー</h2>
+          
+          <div class="form-group">
+            <label for="url-input">URL入力:</label>
+            <textarea id="url-input" rows="3" placeholder="解析したいURLを入力してください"></textarea>
+          </div>
+          
+          <button id="parse-url">解析</button>
+          
+          <div class="url-components">
+            <div class="form-group">
+              <label for="url-protocol">プロトコル:</label>
+              <input type="text" id="url-protocol" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="url-hostname">ホスト名:</label>
+              <input type="text" id="url-hostname" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="url-port">ポート:</label>
+              <input type="text" id="url-port" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="url-pathname">パス:</label>
+              <input type="text" id="url-pathname" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="url-hash">ハッシュ:</label>
+              <input type="text" id="url-hash" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label>クエリパラメータ:</label>
+              <div id="url-params" class="params-container"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="decoded-url">デコード済みURL:</label>
+              <input type="text" id="decoded-url" readonly>
+              <button id="copy-decoded-url" class="copy-button">コピー</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- UNIXタイムスタンプコンテンツ -->
+        <div class="content" id="datetime-content">
+          <!-- Content will be generated by js/tabs/unix-timestamp.js -->
+        </div>
+
+        <!-- 日時比較コンテンツ -->
+        <div class="content" id="datetime-diff-content">
+          <!-- Content will be generated by js/tabs/date-time-diff.js -->
+        </div>
+
+        <!-- ハッシュ生成コンテンツ -->
+        <div class="content" id="hash-content">
+          <!-- Content will be generated by js/tabs/hash.js -->
+        </div>
+
+        <!-- ランダム値生成コンテンツ -->
+        <div class="content" id="random-content">
+          <!-- Content will be generated by js/tabs/random.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="js/encoding/encoding.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/tabs/encode-decode.js"></script>
+  <script src="js/tabs/charset.js"></script>
+  <script src="js/tabs/json.js"></script>
+  <script src="js/tabs/uuid.js"></script>
+  <script src="js/tabs/hex-binary.js"></script>
+  <script src="js/tabs/color.js"></script>
+  <script src="js/tabs/url-parser.js"></script>
+  <script src="js/tabs/unix-timestamp.js"></script>
+  <script src="js/tabs/date-time-diff.js"></script>
+  <script src="js/tabs/hash.js"></script>
+  <script src="js/tabs/random.js"></script>
+</body>
+</html>
