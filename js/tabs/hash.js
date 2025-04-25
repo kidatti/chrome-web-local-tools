@@ -19,7 +19,6 @@ function initHashTab() {
     <div class="form-group">
       <label for="hash-algorithm">アルゴリズム:</label>
       <select id="hash-algorithm">
-        <option value="MD5">MD5</option>
         <option value="SHA-1">SHA-1</option>
         <option value="SHA-256">SHA-256</option>
         <option value="SHA-384">SHA-384</option>
