@@ -137,3 +137,120 @@ textarea[readonly] {
 #response-result {
   font-family: monospace;
 }
+
+/* カラーコード変換のスタイル */
+.color-picker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+input[type="color"] {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.color-preview {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.input-with-button {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  column-gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.input-with-button input {
+  grid-column: 1;
+}
+
+.input-with-button button {
+  width: 80px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.color-sliders {
+  margin-top: 15px;
+}
+
+.slider-group {
+  margin-bottom: 10px;
+}
+
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.slider-group input[type="range"] {
+  width: 100%;
+}
+
+/* URLパーサーのスタイル */
+.params-container {
+  width: 100%;
+  margin-top: 5px;
+  overflow-x: auto;
+}
+
+.params-table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.param-row {
+  display: table-row;
+  width: 100%;
+}
+
+.param-name, .param-value {
+  display: table-cell;
+  padding: 5px;
+  border: 1px solid #ddd;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.param-name {
+  font-weight: 500;
+  width: 30%;
+  background-color: #f8f9fa;
+}
+
+.param-value {
+  width: 70%;
+}
+
+.query-params-container {
+  width: 100%;
+}
+
+.decoded-url-container {
+  width: 100%;
+}
+
+.full-width-input {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+#decoded-url {
+  width: 100%;
+  white-space: normal;
+}

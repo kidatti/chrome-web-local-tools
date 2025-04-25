@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const parsedUrl = new URL(url);
       
       // URL構成要素を表示
-      urlProtocol.value = parsedUrl.protocol;
+      // プロトコルからコロンを削除
+      urlProtocol.value = parsedUrl.protocol.replace(/[:]/g, '');
       urlHostname.value = parsedUrl.hostname;
       urlPort.value = parsedUrl.port || '(デフォルト)';
       urlPathname.value = parsedUrl.pathname;
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let paramsHtml = '';
       
       if (params.toString()) {
+        paramsHtml += '<div class="params-table">';
         for (const [key, value] of params.entries()) {
           paramsHtml += `
             <div class="param-row">
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
         }
+        paramsHtml += '</div>';
       } else {
         paramsHtml = '<div>クエリパラメータはありません</div>';
       }

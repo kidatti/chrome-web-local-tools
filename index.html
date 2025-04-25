@@ -33,7 +33,7 @@
       <div class="content-area">
         <!-- エンコード/デコードコンテンツ -->
         <div class="content active" id="encode-decode-content">
-          <h2>エンコード/デコード</h2>
+          <h2>Encode/Decode</h2>
           
           <div class="form-group">
             <label for="input-text">入力テキスト:</label>
@@ -43,15 +43,15 @@
           <div class="form-group">
             <label for="encoding-type">変換タイプ:</label>
             <select id="encoding-type">
-              <option value="url">URLエンコード/デコード</option>
-              <option value="base64">Base64エンコード/デコード</option>
-              <option value="html">HTMLエンコード/デコード</option>
+              <option value="url">URL</option>
+              <option value="base64">Base64</option>
+              <option value="html">HTML</option>
             </select>
           </div>
           
           <div class="button-group">
-            <button id="encode-button">エンコード</button>
-            <button id="decode-button">デコード</button>
+            <button id="encode-button">Encode</button>
+            <button id="decode-button">Decode</button>
           </div>
           
           <div class="form-group">
@@ -158,8 +158,8 @@
           <div class="form-group">
             <label for="uuid-format">フォーマット:</label>
             <select id="uuid-format">
-              <option value="standard">標準 (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</option>
-              <option value="no-dash">ダッシュなし (xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)</option>
+              <option value="standard">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</option>
+              <option value="no-dash">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</option>
               <option value="braces">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</option>
             </select>
           </div>
@@ -247,7 +247,7 @@
             <div class="input-with-button">
               <input type="text" id="hex-color" value="#007bff">
               <button id="update-from-hex">更新</button>
-              <button id="copy-hex-color" class="copy-button">コピー</button>
+              <button id="copy-hex-color">コピー</button>
             </div>
           </div>
           
@@ -256,7 +256,7 @@
             <div class="input-with-button">
               <input type="text" id="rgb-color" value="rgb(0, 123, 255)">
               <button id="update-from-rgb">更新</button>
-              <button id="copy-rgb-color" class="copy-button">コピー</button>
+              <button id="copy-rgb-color">コピー</button>
             </div>
           </div>
           
@@ -265,7 +265,7 @@
             <div class="input-with-button">
               <input type="text" id="hsl-color" value="hsl(211, 100%, 50%)">
               <button id="update-from-hsl">更新</button>
-              <button id="copy-hsl-color" class="copy-button">コピー</button>
+              <button id="copy-hsl-color">コピー</button>
             </div>
           </div>
           
@@ -322,14 +322,14 @@
               <input type="text" id="url-hash" readonly>
             </div>
             
-            <div class="form-group">
+            <div class="form-group query-params-container">
               <label>クエリパラメータ:</label>
               <div id="url-params" class="params-container"></div>
             </div>
             
-            <div class="form-group">
+            <div class="form-group decoded-url-container">
               <label for="decoded-url">デコード済みURL:</label>
-              <input type="text" id="decoded-url" readonly>
+              <input type="text" id="decoded-url" class="full-width-input" readonly>
               <button id="copy-decoded-url" class="copy-button">コピー</button>
             </div>
           </div>
