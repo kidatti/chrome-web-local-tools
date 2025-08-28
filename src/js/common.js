@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
       item.classList.add('active');
       const contentId = `${item.dataset.content}-content`;
       document.getElementById(contentId).classList.add('active');
+      
+      // 特定のコンテンツの初期化関数を呼び出し
+      if (item.dataset.content === 'markdown-csv') {
+        initMarkdownCsv();
+      }
     });
   });
 });
