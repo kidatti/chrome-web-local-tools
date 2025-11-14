@@ -74,8 +74,8 @@ function initHashTab() {
   });
   
   // コピーボタンのイベント
-  copyHashButton.addEventListener('click', () => {
-    copyToClipboard(hashResult.value);
+  copyHashButton.addEventListener('click', (e) => {
+    copyToClipboard(hashResult.value, e.currentTarget);
   });
 }
 

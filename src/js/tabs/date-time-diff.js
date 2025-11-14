@@ -144,12 +144,12 @@ function initDateTimeDiffTab() {
   calculateDiffButton.addEventListener('click', calculateDifference);
   
   // コピーボタンのイベント
-  copyDiffMillisecondsButton.addEventListener('click', () => {
-    copyToClipboard(diffMilliseconds.value);
+  copyDiffMillisecondsButton.addEventListener('click', (e) => {
+    copyToClipboard(diffMilliseconds.value, e.currentTarget);
   });
-  
-  copyDiffDetailedButton.addEventListener('click', () => {
-    copyToClipboard(diffDetailed.value);
+
+  copyDiffDetailedButton.addEventListener('click', (e) => {
+    copyToClipboard(diffDetailed.value, e.currentTarget);
   });
 }
 

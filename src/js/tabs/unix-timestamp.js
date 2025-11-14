@@ -194,24 +194,24 @@ function initUnixTimestampTab() {
   });
   
   // コピーボタンのイベント
-  copyTimestampSecondsButton.addEventListener('click', () => {
-    copyToClipboard(currentTimestampSeconds.value);
+  copyTimestampSecondsButton.addEventListener('click', (e) => {
+    copyToClipboard(currentTimestampSeconds.value, e.currentTarget);
   });
-  
-  copyTimestampMillisecondsButton.addEventListener('click', () => {
-    copyToClipboard(currentTimestampMilliseconds.value);
+
+  copyTimestampMillisecondsButton.addEventListener('click', (e) => {
+    copyToClipboard(currentTimestampMilliseconds.value, e.currentTarget);
   });
-  
-  copyTimestampResultButton.addEventListener('click', () => {
-    copyToClipboard(timestampResult.value);
+
+  copyTimestampResultButton.addEventListener('click', (e) => {
+    copyToClipboard(timestampResult.value, e.currentTarget);
   });
-  
-  copyDateTimestampSecondsButton.addEventListener('click', () => {
-    copyToClipboard(dateTimestampSeconds.value);
+
+  copyDateTimestampSecondsButton.addEventListener('click', (e) => {
+    copyToClipboard(dateTimestampSeconds.value, e.currentTarget);
   });
-  
-  copyDateTimestampMillisecondsButton.addEventListener('click', () => {
-    copyToClipboard(dateTimestampMilliseconds.value);
+
+  copyDateTimestampMillisecondsButton.addEventListener('click', (e) => {
+    copyToClipboard(dateTimestampMilliseconds.value, e.currentTarget);
   });
   
   // 現在の日時を設定

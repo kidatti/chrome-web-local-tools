@@ -55,9 +55,9 @@ Web開発に役立つツールを集めたChrome拡張機能です。
   - リアルタイム表示
   - 差分結果のコピー
 
-- **Markdown <=> CSV 変換**
-  - CSV => Markdown 変換
-  - Markdown => CSV 変換
+- **Markdown <=> CSV/TSV 変換**
+  - CSV/TSV => Markdown 変換
+  - Markdown => CSV/TSV 変換
 
 ## 特徴
 
@@ -67,6 +67,10 @@ Web開発に役立つツールを集めたChrome拡張機能です。
 - **コピー機能**：すべての結果をワンクリックでクリップボードにコピー可能
 
 【変更履歴】
+
+# v.0.5.0
+　　・bugfix クリップボードへのコピー
+　　・New TSV <=> Markdown 変換
 
 # v.0.4.1
 　　・bugfix

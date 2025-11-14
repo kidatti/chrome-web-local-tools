@@ -112,15 +112,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  copyHexButton.addEventListener('click', () => {
-    copyToClipboard(hexResult.value);
+  copyHexButton.addEventListener('click', (e) => {
+    copyToClipboard(hexResult.value, e.currentTarget);
   });
-  
-  copyBinaryButton.addEventListener('click', () => {
-    copyToClipboard(binaryResult.value);
+
+  copyBinaryButton.addEventListener('click', (e) => {
+    copyToClipboard(binaryResult.value, e.currentTarget);
   });
-  
-  copyStringButton.addEventListener('click', () => {
-    copyToClipboard(stringResult.value);
+
+  copyStringButton.addEventListener('click', (e) => {
+    copyToClipboard(stringResult.value, e.currentTarget);
   });
 });

@@ -132,12 +132,12 @@ function initRandomTab() {
   });
   
   // コピーボタンのイベント
-  copyRandomStringButton.addEventListener('click', () => {
-    copyToClipboard(randomStringResult.value);
+  copyRandomStringButton.addEventListener('click', (e) => {
+    copyToClipboard(randomStringResult.value, e.currentTarget);
   });
-  
-  copyRandomNumberButton.addEventListener('click', () => {
-    copyToClipboard(randomNumberResult.value);
+
+  copyRandomNumberButton.addEventListener('click', (e) => {
+    copyToClipboard(randomNumberResult.value, e.currentTarget);
   });
 }
 

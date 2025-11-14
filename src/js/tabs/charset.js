@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  copyCharsetButton.addEventListener('click', () => {
-    copyToClipboard(charsetOutput.value);
+  copyCharsetButton.addEventListener('click', (e) => {
+    copyToClipboard(charsetOutput.value, e.currentTarget);
   });
 });

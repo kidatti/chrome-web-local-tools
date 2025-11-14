@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return uuid;
   }
   
-  copyUuidButton.addEventListener('click', () => {
-    copyToClipboard(uuidResult.value);
+  copyUuidButton.addEventListener('click', (e) => {
+    copyToClipboard(uuidResult.value, e.currentTarget);
   });
 });

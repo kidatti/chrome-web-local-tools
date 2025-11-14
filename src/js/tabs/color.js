@@ -45,16 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
   blueSlider.addEventListener('input', updateColorFromSliders);
   
   // コピーボタン
-  copyHexColorButton.addEventListener('click', () => {
-    copyToClipboard(hexColor.value);
+  copyHexColorButton.addEventListener('click', (e) => {
+    copyToClipboard(hexColor.value, e.currentTarget);
   });
-  
-  copyRgbColorButton.addEventListener('click', () => {
-    copyToClipboard(rgbColor.value);
+
+  copyRgbColorButton.addEventListener('click', (e) => {
+    copyToClipboard(rgbColor.value, e.currentTarget);
   });
-  
-  copyHslColorButton.addEventListener('click', () => {
-    copyToClipboard(hslColor.value);
+
+  copyHslColorButton.addEventListener('click', (e) => {
+    copyToClipboard(hslColor.value, e.currentTarget);
   });
   
   // HEXから色を更新

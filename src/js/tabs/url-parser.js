@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  copyDecodedUrlButton.addEventListener('click', () => {
-    copyToClipboard(decodedUrl.value);
+  copyDecodedUrlButton.addEventListener('click', (e) => {
+    copyToClipboard(decodedUrl.value, e.currentTarget);
   });
   
   // HTML特殊文字のエスケープ

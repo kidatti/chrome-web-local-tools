@@ -6,14 +6,31 @@ body {
   background-color: #f5f5f5;
 }
 
+/* 開発環境バナー */
+.dev-banner {
+  display: none; /* デフォルトは非表示、JavaScriptで開発者モードの場合のみ表示 */
+  width: 100%;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin: 0;
+}
+
 .fullpage-container {
   width: 100%;
-  max-width: 1200px;
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
 }

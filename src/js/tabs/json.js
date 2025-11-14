@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  copyJsonButton.addEventListener('click', () => {
-    copyToClipboard(jsonOutput.value);
+  copyJsonButton.addEventListener('click', (e) => {
+    copyToClipboard(jsonOutput.value, e.currentTarget);
   });
 });

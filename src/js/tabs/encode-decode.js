@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return div.textContent;
   }
   
-  copyEncodingButton.addEventListener('click', () => {
-    copyToClipboard(outputText.value);
+  copyEncodingButton.addEventListener('click', (e) => {
+    copyToClipboard(outputText.value, e.currentTarget);
   });
 });
