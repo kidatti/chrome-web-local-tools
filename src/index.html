@@ -17,9 +17,11 @@
       <div class="sidebar">
         <nav class="menu">
           <ul>
-            <li class="menu-item active" data-content="encode-decode">エンコード/デコード</li>
+            <li class="menu-item active" data-content="encode-decode">URL/Base64/HTML</li>
+            <li class="menu-item" data-content="markdown-csv">Markdown/CSV/TSV</li>
             <li class="menu-item" data-content="charset">文字コード変換</li>
             <li class="menu-item" data-content="json">JSONパース</li>
+            <li class="menu-item" data-content="jwt">JWT</li>
             <li class="menu-item" data-content="datetime">UNIXタイムスタンプ</li>
             <li class="menu-item" data-content="datetime-diff">日時比較</li>
             <li class="menu-item" data-content="hash">ハッシュ生成</li>
@@ -29,7 +31,6 @@
             <li class="menu-item" data-content="color">カラーコード</li>
             <li class="menu-item" data-content="url-parser">URLパーサー</li>
             <li class="menu-item" data-content="text-diff">Text Diff</li>
-            <li class="menu-item" data-content="markdown-csv">Markdown⇔CSV/TSV</li>
           </ul>
         </nav>
       </div>
@@ -38,7 +39,7 @@
       <div class="content-area">
         <!-- エンコード/デコードコンテンツ -->
         <div class="content active" id="encode-decode-content">
-          <h2>Encode/Decode</h2>
+          <h2>URL/Base64/HTML エンコード・デコード</h2>
           
           <div class="form-group">
             <label for="input-text">入力テキスト:</label>
@@ -50,7 +51,7 @@
             <select id="encoding-type">
               <option value="url">URL</option>
               <option value="base64">Base64</option>
-              <option value="html">HTML</option>
+              <option value="html">HTML特殊文字</option>
             </select>
           </div>
           
@@ -148,7 +149,80 @@
           
           <button id="copy-json" class="copy-button">結果をコピー</button>
         </div>
-        
+
+        <!-- JWT デコード/エンコード コンテンツ -->
+        <div class="content" id="jwt-content">
+          <h2>JWT デコード/エンコード</h2>
+
+          <div class="section">
+            <h3>JWT デコード</h3>
+            <div class="form-group">
+              <label for="jwt-input">JWT トークン:</label>
+              <textarea id="jwt-input" rows="5" placeholder="JWT トークンを入力してください (例: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c)"></textarea>
+            </div>
+
+            <button id="jwt-decode">デコード</button>
+
+            <div class="form-group">
+              <label for="jwt-header-output">ヘッダー:</label>
+              <textarea id="jwt-header-output" rows="5" readonly></textarea>
+              <button id="copy-jwt-header" class="copy-button">コピー</button>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-payload-output">ペイロード:</label>
+              <textarea id="jwt-payload-output" rows="8" readonly></textarea>
+              <button id="copy-jwt-payload" class="copy-button">コピー</button>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-signature-output">署名:</label>
+              <textarea id="jwt-signature-output" rows="3" readonly></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-info-output">トークン情報:</label>
+              <textarea id="jwt-info-output" rows="8" readonly></textarea>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>JWT エンコード</h3>
+            <div class="form-group">
+              <label for="jwt-header-input">ヘッダー (JSON):</label>
+              <textarea id="jwt-header-input" rows="3" placeholder='{"typ": "JWT"}'></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-payload-input">ペイロード (JSON):</label>
+              <textarea id="jwt-payload-input" rows="8" placeholder='{"sub": "1234567890", "name": "John Doe", "iat": 1516239022}'></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-algorithm">アルゴリズム:</label>
+              <select id="jwt-algorithm">
+                <option value="HS256">HS256</option>
+                <option value="HS384">HS384</option>
+                <option value="HS512">HS512</option>
+                <option value="none">none (署名なし)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="jwt-secret-input">シークレットキー (HMAC用):</label>
+              <input type="text" id="jwt-secret-input" placeholder="your-256-bit-secret">
+            </div>
+
+            <button id="jwt-encode">エンコード</button>
+
+            <div class="form-group">
+              <label for="jwt-encoded-output">生成されたJWT:</label>
+              <textarea id="jwt-encoded-output" rows="5" readonly></textarea>
+              <button id="copy-jwt-encoded" class="copy-button">コピー</button>
+            </div>
+          </div>
+        </div>
+
         <!-- UUID生成コンテンツ -->
         <div class="content" id="generator-content">
           <h2>UUID生成</h2>
@@ -407,6 +481,7 @@
   <script src="js/tabs/encode-decode.js"></script>
   <script src="js/tabs/charset.js"></script>
   <script src="js/tabs/json.js"></script>
+  <script src="js/tabs/jwt.js"></script>
   <script src="js/tabs/uuid.js"></script>
   <script src="js/tabs/hex-binary.js"></script>
   <script src="js/tabs/color.js"></script>

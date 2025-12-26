@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Web Local Tools",
-  "version": "0.5.0",
-  "description": "文字コード変換、UUID生成、Markdown などのWeb開発ツール",
+  "version": "0.6.0",
+  "description": "文字コード変換、UUID生成、Markdown、JWT などのWeb開発ツール",
   "action": {
     "default_icon": {
       "128": "images/icon128.png"

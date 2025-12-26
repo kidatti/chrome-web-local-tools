@@ -1,6 +1,6 @@
-// エンコード/デコードタブの機能
+// URL/Base64/HTML エンコード・デコードタブの機能
 document.addEventListener('DOMContentLoaded', function() {
-  // エンコード/デコード機能
+  // URL/Base64/HTML エンコード/デコード機能
   const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
   const encodingType = document.getElementById('encoding-type');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // HTML特殊文字のエスケープ/アンエスケープ
+  // HTML特殊文字（HTMLエンティティ）のエスケープ/アンエスケープ
   function escapeHTML(text) {
     const div = document.createElement('div');
     div.textContent = text;
