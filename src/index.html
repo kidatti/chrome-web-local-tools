@@ -154,8 +154,14 @@
         <div class="content" id="jwt-content">
           <h2>JWT デコード/エンコード</h2>
 
-          <div class="section">
-            <h3>JWT デコード</h3>
+          <!-- タブボタン -->
+          <div class="tabs">
+            <button class="tab-button active" data-jwt-tab="decode">デコード</button>
+            <button class="tab-button" data-jwt-tab="encode">エンコード</button>
+          </div>
+
+          <!-- デコードタブ -->
+          <div class="tab-content active" id="jwt-decode-tab">
             <div class="form-group">
               <label for="jwt-input">JWT トークン:</label>
               <textarea id="jwt-input" rows="5" placeholder="JWT トークンを入力してください (例: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c)"></textarea>
@@ -163,6 +169,20 @@
 
             <button id="jwt-decode">デコード</button>
 
+            <h4 style="font-size: 16px; margin-top: 20px; margin-bottom: 10px; color: #555;">署名の検証（オプション）</h4>
+            <div class="form-group">
+              <label for="jwt-verify-secret">シークレットキー (HMAC用):</label>
+              <input type="text" id="jwt-verify-secret" placeholder="署名を検証する場合はシークレットキーを入力してください">
+            </div>
+
+            <button id="jwt-verify">署名を検証</button>
+
+            <div class="form-group">
+              <label for="jwt-verify-result">検証結果:</label>
+              <textarea id="jwt-verify-result" rows="3" readonly></textarea>
+            </div>
+
+            <h4 style="font-size: 16px; margin-top: 20px; margin-bottom: 10px; color: #555;">デコード結果</h4>
             <div class="form-group">
               <label for="jwt-header-output">ヘッダー:</label>
               <textarea id="jwt-header-output" rows="5" readonly></textarea>
@@ -186,20 +206,16 @@
             </div>
           </div>
 
-          <div class="section">
-            <h3>JWT エンコード</h3>
+          <!-- エンコードタブ -->
+          <div class="tab-content" id="jwt-encode-tab">
+            <h4 style="font-size: 16px; margin-bottom: 10px; color: #555;">ヘッダー設定</h4>
             <div class="form-group">
-              <label for="jwt-header-input">ヘッダー (JSON):</label>
-              <textarea id="jwt-header-input" rows="3" placeholder='{"typ": "JWT"}'></textarea>
+              <label for="jwt-typ-input">typ (トークンタイプ):</label>
+              <input type="text" id="jwt-typ-input" value="JWT" placeholder="JWT">
             </div>
 
             <div class="form-group">
-              <label for="jwt-payload-input">ペイロード (JSON):</label>
-              <textarea id="jwt-payload-input" rows="8" placeholder='{"sub": "1234567890", "name": "John Doe", "iat": 1516239022}'></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="jwt-algorithm">アルゴリズム:</label>
+              <label for="jwt-algorithm">alg (アルゴリズム):</label>
               <select id="jwt-algorithm">
                 <option value="HS256">HS256</option>
                 <option value="HS384">HS384</option>
@@ -208,6 +224,17 @@
               </select>
             </div>
 
+            <h4 style="font-size: 16px; margin-top: 20px; margin-bottom: 10px; color: #555;">ペイロード設定</h4>
+            <div class="form-group">
+              <label for="jwt-payload-input">ペイロード (JSON):</label>
+              <textarea id="jwt-payload-input" rows="8">{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022
+}</textarea>
+            </div>
+
+            <h4 style="font-size: 16px; margin-top: 20px; margin-bottom: 10px; color: #555;">署名設定</h4>
             <div class="form-group">
               <label for="jwt-secret-input">シークレットキー (HMAC用):</label>
               <input type="text" id="jwt-secret-input" placeholder="your-256-bit-secret">

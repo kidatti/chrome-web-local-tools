@@ -1,5 +1,32 @@
 // JWTデコード/エンコードタブの機能
 document.addEventListener('DOMContentLoaded', function() {
+  // タブ切り替え機能
+  const jwtTabButtons = document.querySelectorAll('[data-jwt-tab]');
+  const jwtDecodeTab = document.getElementById('jwt-decode-tab');
+  const jwtEncodeTab = document.getElementById('jwt-encode-tab');
+
+  jwtTabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.getAttribute('data-jwt-tab');
+
+      // すべてのタブボタンから active クラスを削除
+      jwtTabButtons.forEach(btn => btn.classList.remove('active'));
+      // クリックされたボタンに active クラスを追加
+      button.classList.add('active');
+
+      // すべてのタブコンテンツを非表示
+      jwtDecodeTab.classList.remove('active');
+      jwtEncodeTab.classList.remove('active');
+
+      // 選択されたタブを表示
+      if (targetTab === 'decode') {
+        jwtDecodeTab.classList.add('active');
+      } else if (targetTab === 'encode') {
+        jwtEncodeTab.classList.add('active');
+      }
+    });
+  });
+
   // JWT機能
   const jwtInput = document.getElementById('jwt-input');
   const jwtDecodeButton = document.getElementById('jwt-decode');
@@ -10,11 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const copyJwtHeaderButton = document.getElementById('copy-jwt-header');
   const copyJwtPayloadButton = document.getElementById('copy-jwt-payload');
 
+  // 署名検証用
+  const jwtVerifySecret = document.getElementById('jwt-verify-secret');
+  const jwtVerifyButton = document.getElementById('jwt-verify');
+  const jwtVerifyResult = document.getElementById('jwt-verify-result');
+
   // エンコード用
-  const jwtHeaderInput = document.getElementById('jwt-header-input');
+  const jwtTypInput = document.getElementById('jwt-typ-input');
+  const jwtAlgorithm = document.getElementById('jwt-algorithm');
   const jwtPayloadInput = document.getElementById('jwt-payload-input');
   const jwtSecretInput = document.getElementById('jwt-secret-input');
-  const jwtAlgorithm = document.getElementById('jwt-algorithm');
   const jwtEncodeButton = document.getElementById('jwt-encode');
   const jwtEncodedOutput = document.getElementById('jwt-encoded-output');
   const copyJwtEncodedButton = document.getElementById('copy-jwt-encoded');
@@ -141,26 +173,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // JWTエンコード
   jwtEncodeButton.addEventListener('click', async () => {
-    const headerText = jwtHeaderInput.value.trim();
+    const typ = jwtTypInput.value.trim() || 'JWT';
+    const algorithm = jwtAlgorithm.value;
     const payloadText = jwtPayloadInput.value.trim();
     const secret = jwtSecretInput.value;
-    const algorithm = jwtAlgorithm.value;
 
-    if (!headerText || !payloadText) {
-      jwtEncodedOutput.value = 'ヘッダーとペイロードを入力してください';
+    if (!payloadText) {
+      jwtEncodedOutput.value = 'ペイロードを入力してください';
       return;
     }
 
     try {
-      // JSONとしてパース
-      const header = JSON.parse(headerText);
+      // ペイロードをJSONとしてパース
       const payload = JSON.parse(payloadText);
 
-      // アルゴリズムをヘッダーに設定
-      header.alg = algorithm;
-      if (!header.typ) {
-        header.typ = 'JWT';
-      }
+      // ヘッダーを自動生成
+      const header = {
+        alg: algorithm,
+        typ: typ
+      };
 
       // Base64URLエンコード
       const encodedHeader = base64UrlEncode(JSON.stringify(header));
@@ -243,5 +274,98 @@ document.addEventListener('DOMContentLoaded', function() {
 
   copyJwtEncodedButton.addEventListener('click', (e) => {
     copyToClipboard(jwtEncodedOutput.value, e.currentTarget);
+  });
+
+  // 署名検証
+  jwtVerifyButton.addEventListener('click', async () => {
+    const token = jwtInput.value.trim();
+    const secret = jwtVerifySecret.value;
+
+    if (!token) {
+      jwtVerifyResult.value = 'JWTトークンを入力してください';
+      return;
+    }
+
+    if (!secret) {
+      jwtVerifyResult.value = 'シークレットキーを入力してください';
+      return;
+    }
+
+    try {
+      // JWTを3つのパートに分割
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        throw new Error('無効なJWT形式です');
+      }
+
+      const encodedHeader = parts[0];
+      const encodedPayload = parts[1];
+      const originalSignature = parts[2];
+
+      // ヘッダーをデコードしてアルゴリズムを取得
+      const header = JSON.parse(base64UrlDecode(encodedHeader));
+      const algorithm = header.alg;
+
+      if (algorithm === 'none') {
+        jwtVerifyResult.value = '署名なし（none）のトークンです。検証は不要です。';
+        return;
+      }
+
+      if (!algorithm.startsWith('HS')) {
+        jwtVerifyResult.value = `${algorithm}アルゴリズムはサポートされていません。\n現在サポートされているのは HS256, HS384, HS512 のみです。`;
+        return;
+      }
+
+      // 署名を再生成
+      const message = `${encodedHeader}.${encodedPayload}`;
+      const encoder = new TextEncoder();
+      const keyData = encoder.encode(secret);
+      const messageData = encoder.encode(message);
+
+      let hashAlgorithm;
+      switch (algorithm) {
+        case 'HS256':
+          hashAlgorithm = 'SHA-256';
+          break;
+        case 'HS384':
+          hashAlgorithm = 'SHA-384';
+          break;
+        case 'HS512':
+          hashAlgorithm = 'SHA-512';
+          break;
+        default:
+          throw new Error(`サポートされていないアルゴリズム: ${algorithm}`);
+      }
+
+      // Web Crypto APIを使用して署名生成
+      const key = await crypto.subtle.importKey(
+        'raw',
+        keyData,
+        { name: 'HMAC', hash: hashAlgorithm },
+        false,
+        ['sign']
+      );
+
+      const signatureBuffer = await crypto.subtle.sign(
+        'HMAC',
+        key,
+        messageData
+      );
+
+      // ArrayBufferをBase64URLに変換
+      const signatureArray = Array.from(new Uint8Array(signatureBuffer));
+      const signatureBase64 = btoa(String.fromCharCode(...signatureArray));
+      const calculatedSignature = signatureBase64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+
+      // 署名を比較
+      if (calculatedSignature === originalSignature) {
+        jwtVerifyResult.value = '✓ 署名は有効です\n\n署名の検証に成功しました。このJWTは改ざんされていません。';
+      } else {
+        jwtVerifyResult.value = '✗ 署名は無効です\n\n署名の検証に失敗しました。\n- シークレットキーが間違っている\n- トークンが改ざんされている\nのいずれかの可能性があります。';
+      }
+
+    } catch (error) {
+      jwtVerifyResult.value = `エラー: ${error.message}`;
+    }
   });
 });
